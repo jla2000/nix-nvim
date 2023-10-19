@@ -1,10 +1,8 @@
-require("neodev").setup({})
-
 local lsp_zero = require("lsp-zero")
 
 lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({ buffer = bufnr })
-  vim.lsp.inlay_hint(bufnr, true)
+  print("Hello world")
 end)
 
 lsp_zero.format_on_save({
@@ -14,8 +12,9 @@ lsp_zero.format_on_save({
   }
 })
 
-lsp_zero.setup_servers({ "rnix" })
+require("lspconfig").rnix.setup({})
 
+require("neodev").setup({})
 require("lspconfig").lua_ls.setup({
   settings = {
     Lua = {
