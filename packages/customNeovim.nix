@@ -25,6 +25,11 @@ let
         tokyonight-nvim
         plenary-nvim
         lazygit-nvim
+        lsp-zero-nvim
+        nvim-lspconfig
+        cmp-nvim-lsp
+        nvim-cmp
+        luasnip
       ];
     };
   };
@@ -33,6 +38,7 @@ pkgs.writeShellApplication {
   name = "nvim";
   runtimeInputs = with pkgs; [
     lazygit
+    lua-language-server
   ];
   text = ''
     export XDG_CONFIG_HOME=${configDir}
