@@ -1,0 +1,7 @@
+print("Hello world")
+require("options")
+require("keymaps")
+require("git")
+require("indent")
+require("oil")
+require("treesitter")
