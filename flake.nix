@@ -5,8 +5,9 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
+
     neovim = {
-      url = "github:neovim/neovim?dir=contrib";
+      url = "github:neovim/neovim/stable?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -15,7 +16,7 @@
     let
       system = "x86_64-linux";
 
-      overlayFlakeInputs = prev: final: {
+      overlayNeovim = prev: final: {
         neovim = neovim.packages.${system}.neovim;
       };
 
@@ -28,7 +29,7 @@
       pkgs = import nixpkgs
         {
           inherit system;
-          overlays = [ overlayFlakeInputs overlayCustomNeovim ];
+          overlays = [ overlayNeovim overlayCustomNeovim ];
         };
     in
     {
