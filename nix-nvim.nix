@@ -3,7 +3,7 @@ let
   distroName = "nix-nvim";
   configDir = pkgs.stdenv.mkDerivation {
     name = "neovim-config";
-    src = ../config;
+    src = ./config;
     installPhase = ''
       mkdir -p $out/${distroName}
       cp -r ./ $out/${distroName}

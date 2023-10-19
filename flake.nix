@@ -20,8 +20,8 @@
         neovim = neovim.packages.${system}.neovim;
       };
 
-      overlayCustomNeovim = prev: final: {
-        customNeovim = import ./packages/customNeovim.nix {
+      overlayNixNvim = prev: final: {
+        nixNvim = import ./nix-nvim.nix {
           pkgs = final;
         };
       };
@@ -29,14 +29,14 @@
       pkgs = import nixpkgs
         {
           inherit system;
-          overlays = [ overlayNeovim overlayCustomNeovim ];
+          overlays = [ overlayNeovim overlayNixNvim ];
         };
     in
     {
-      packages.${system}.default = pkgs.customNeovim;
+      packages.${system}.default = pkgs.nixNvim;
       apps.${system}.default = {
         type = "app";
-        program = "${pkgs.customNeovim}/bin/nvim";
+        program = "${pkgs.nixNvim}/bin/nvim";
       };
     };
 }
