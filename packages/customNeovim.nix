@@ -28,6 +28,7 @@ let
         nvim-lspconfig
         nvim-treesitter
         nvim-treesitter-parsers.bash
+        nvim-treesitter-parsers.cpp
         nvim-treesitter-parsers.lua
         nvim-treesitter-parsers.nix
         nvim-treesitter-parsers.rust
@@ -43,9 +44,11 @@ in
 pkgs.writeShellApplication {
   name = "nvim";
   runtimeInputs = with pkgs; [
+    libclang
+    git
     lazygit
-    ripgrep
     lua-language-server
+    ripgrep
     rnix-lsp
   ];
   text = ''

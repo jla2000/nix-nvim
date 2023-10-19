@@ -12,6 +12,10 @@ lsp_zero.format_on_save({
   }
 })
 
+require("lspconfig").clangd.setup({
+  inlay_hints = true
+})
+
 require("lspconfig").rnix.setup({})
 
 require("neodev").setup({})
