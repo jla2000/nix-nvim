@@ -10,6 +10,9 @@ let
   };
   configuredNeovim = pkgs.wrapNeovim pkgs.neovim {
     configure = {
+      customRC = ''
+        luafile ${configDir}/nvim/init.lua
+      '';
       packages.all.start = with pkgs.vimPlugins; [
         indent-blankline-nvim
         mini-nvim
