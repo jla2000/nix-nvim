@@ -4,33 +4,35 @@ let
     name = "neovim-config";
     src = ../config;
     installPhase = ''
-      mkdir -p $out/nvim
-      cp -r ./ $out/nvim
+      mkdir -p $out/nix-nvim
+      cp -r ./ $out/nix-nvim
     '';
   };
   configuredNeovim = pkgs.wrapNeovim pkgs.neovim {
     configure = {
       customRC = ''
-        luafile ${configDir}/nvim/init.lua
+        luafile ${configDir}/nix-nvim/init.lua
       '';
       packages.all.start = with pkgs.vimPlugins; [
+        cmp-nvim-lsp
         indent-blankline-nvim
+        lazygit-nvim
+        lsp-zero-nvim
+        luasnip
         mini-nvim
+        neodev-nvim
+        nvim-cmp
+        nvim-lspconfig
         nvim-treesitter
         nvim-treesitter-parsers.bash
         nvim-treesitter-parsers.lua
         nvim-treesitter-parsers.nix
         nvim-treesitter-parsers.rust
+        nvim-web-devicons
         oil-nvim
-        tokyonight-nvim
         plenary-nvim
-        lazygit-nvim
-        lsp-zero-nvim
-        nvim-lspconfig
-        cmp-nvim-lsp
-        nvim-cmp
-        luasnip
-        neodev-nvim
+        telescope-nvim
+        tokyonight-nvim
       ];
     };
   };
@@ -39,12 +41,13 @@ pkgs.writeShellApplication {
   name = "nvim";
   runtimeInputs = with pkgs; [
     lazygit
+    ripgrep
     lua-language-server
     rnix-lsp
   ];
   text = ''
     export XDG_CONFIG_HOME=${configDir}
-    export XDG_DATA_HOME=${configDir}
+    export NVIM_APPNAME=nix-nvim
     ${configuredNeovim}/bin/nvim "$@"
   '';
 }
