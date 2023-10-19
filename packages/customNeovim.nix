@@ -11,6 +11,8 @@ let
   configuredNeovim = pkgs.wrapNeovim pkgs.neovim {
     configure = {
       customRC = ''
+        lua vim.opt.runtimepath:remove(vim.fn.expand('~/.config/nix-nvim'))
+        lua vim.opt.runtimepath:append(vim.fn.expand('${configDir}/nix-nvim'))
         luafile ${configDir}/nix-nvim/init.lua
       '';
       packages.all.start = with pkgs.vimPlugins; [
@@ -46,7 +48,6 @@ pkgs.writeShellApplication {
     rnix-lsp
   ];
   text = ''
-    export XDG_CONFIG_HOME=${configDir}
     export NVIM_APPNAME=nix-nvim
     ${configuredNeovim}/bin/nvim "$@"
   '';
