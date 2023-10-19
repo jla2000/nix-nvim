@@ -30,6 +30,7 @@ let
         cmp-nvim-lsp
         nvim-cmp
         luasnip
+        neodev-nvim
       ];
     };
   };
@@ -39,6 +40,7 @@ pkgs.writeShellApplication {
   runtimeInputs = with pkgs; [
     lazygit
     lua-language-server
+    rnix-lsp
   ];
   text = ''
     export XDG_CONFIG_HOME=${configDir}
