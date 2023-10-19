@@ -1,19 +1,20 @@
 { pkgs }:
 let
+  distroName = "nix-nvim";
   configDir = pkgs.stdenv.mkDerivation {
     name = "neovim-config";
     src = ../config;
     installPhase = ''
-      mkdir -p $out/nix-nvim
-      cp -r ./ $out/nix-nvim
+      mkdir -p $out/${distroName}
+      cp -r ./ $out/${distroName}
     '';
   };
   configuredNeovim = pkgs.wrapNeovim pkgs.neovim {
     configure = {
       customRC = ''
-        lua vim.opt.runtimepath:remove(vim.fn.expand('~/.config/nix-nvim'))
-        lua vim.opt.runtimepath:append(vim.fn.expand('${configDir}/nix-nvim'))
-        luafile ${configDir}/nix-nvim/init.lua
+        lua vim.opt.runtimepath:remove(vim.fn.expand('~/.config/${distroName}'))
+        lua vim.opt.runtimepath:append(vim.fn.expand('${configDir}/${distroName}'))
+        luafile ${configDir}/${distroName}/init.lua
       '';
       packages.all.start = with pkgs.vimPlugins; [
         cmp-nvim-lsp
@@ -48,7 +49,7 @@ pkgs.writeShellApplication {
     rnix-lsp
   ];
   text = ''
-    export NVIM_APPNAME=nix-nvim
+    export NVIM_APPNAME=${distroName}
     ${configuredNeovim}/bin/nvim "$@"
   '';
 }
