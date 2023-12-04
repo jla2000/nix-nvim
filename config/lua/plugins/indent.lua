@@ -4,7 +4,7 @@ require("ibl").setup({
     tab_char = "│",
   },
   scope = {
-    enabled = false
+    enabled = false,
   },
 })
 require("mini.indentscope").setup({

@@ -18,12 +18,14 @@ let
       '';
       packages.all.start = with pkgs.vimPlugins; [
         cmp-nvim-lsp
+        fzf-vim
         indent-blankline-nvim
         lazygit-nvim
         lsp-zero-nvim
         luasnip
         mini-nvim
         neodev-nvim
+        nvim-bqf
         nvim-cmp
         nvim-lspconfig
         nvim-treesitter
@@ -36,7 +38,6 @@ let
         oil-nvim
         plenary-nvim
         telescope-nvim
-        tokyonight-nvim
       ];
     };
   };
@@ -44,12 +45,13 @@ in
 pkgs.writeShellApplication {
   name = "nvim";
   runtimeInputs = with pkgs; [
-    libclang
     git
     lazygit
+    libclang
     lua-language-server
+    nil
     ripgrep
-    rnix-lsp
+    rust-analyzer
   ];
   text = ''
     export NVIM_APPNAME=${distroName}

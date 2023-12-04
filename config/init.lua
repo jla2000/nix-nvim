@@ -1,6 +1,7 @@
 require("core.options")
 require("core.keymaps")
 require("core.autocmds")
+
 require("plugins.git")
 require("plugins.indent")
 require("plugins.oil")
