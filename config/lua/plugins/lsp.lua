@@ -14,6 +14,8 @@ lsp_zero.format_on_save({
   servers = {
     ["lua_ls"] = { "lua" },
     ["nil_ls"] = { "nix" },
+    ["clangd"] = { "cpp" },
+    ["rust_analyzer"] = { "rust" },
   },
 })
 
@@ -25,7 +27,7 @@ lspconfig.rust_analyzer.setup({})
 -- C++
 lspconfig.clangd.setup({ inlay_hints = true })
 -- Nix
-lspconfig.nil_ls.setup({})
+lspconfig.nil_ls.setup({ formatting = { command = "nixpkgs-fmt" } })
 -- Lua
 require("neodev").setup({})
 lspconfig.lua_ls.setup({

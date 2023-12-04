@@ -38,6 +38,9 @@ let
         oil-nvim
         plenary-nvim
         telescope-nvim
+        telescope-fzf-native-nvim
+        tokyonight-nvim
+        lualine-nvim
       ];
     };
   };
@@ -50,6 +53,7 @@ pkgs.writeShellApplication {
     libclang
     lua-language-server
     nil
+    nixpkgs-fmt
     ripgrep
     rust-analyzer
   ];
